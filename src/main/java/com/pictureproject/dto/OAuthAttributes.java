@@ -5,6 +5,7 @@ import com.pictureproject.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Getter
@@ -51,7 +52,8 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
-                .role(Role.GUEST)
+                .role(Role.USER)
+                .createDate(LocalDateTime.now())
                 .build();
     }
 }

@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +30,16 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @Column
+    private LocalDateTime createDate;
+
     @Builder
-    public User(String name, String email, String picture, Role role){
+    public User(String name, String email, String picture, Role role, LocalDateTime createDate){
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.createDate=createDate;
     }
 
     public User update(String name, String picture){
