@@ -1,6 +1,7 @@
 package com.pictureproject.service;
 
 import com.pictureproject.dto.ItemFormDto;
+import com.pictureproject.dto.ItemImgDto;
 import com.pictureproject.entity.Item;
 import com.pictureproject.entity.ItemImg;
 import com.pictureproject.repository.ItemImgRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,6 +43,25 @@ public class ItemService {
         }
 
         return item.getId();
+    }
+
+    //물품을 불러오는 메소드
+    @Transactional(readOnly = true)
+    public ItemFormDto getItemDtl(Long itemId){
+
+        List<ItemImg> itemImgList=itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        List<ItemImgDto> itemImgDtoList=new ArrayList<>();
+
+        for(ItemImg itemImg:itemImgList){ //조회한 itemImg 엔티티를 ItemImgDto 객체로 만들어서 추가
+            ItemImgDto itemImgDto=ItemImgDto.of(itemImg);
+            itemImgDtoList.add(itemImgDto);
+        }
+
+        Item item=itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+        ItemFormDto itemFormDto=ItemFormDto.of(item);
+        itemFormDto.setItemImgDtoList(itemImgDtoList);
+        return itemFormDto;
+
     }
 
 }
