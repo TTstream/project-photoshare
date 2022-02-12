@@ -1,5 +1,6 @@
 package com.pictureproject.entity;
 
+import com.pictureproject.dto.ItemFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,5 +21,10 @@ public class Item extends BaseEntity{
     private String title; // 제목
 
     private String itemDetail; //상품 상세 설명
+
+    public void updateItem(ItemFormDto itemFormDto){
+        this.title=itemFormDto.getTitle();
+        this.itemDetail=itemFormDto.getItemDetail();
+    }
     
 }
