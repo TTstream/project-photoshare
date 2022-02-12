@@ -65,6 +65,28 @@ public class ItemController {
 
     }
 
+    //물품 수정 저장
+    @PostMapping(value = "/user/item/{itemId}")
+    public String itemUpdate(@Valid ItemFormDto itemFormDto,BindingResult bindingResult,
+                             @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList,Model model){
 
+        if(bindingResult.hasErrors()){
+            return "item/itemForm";
+        }
+
+        if(itemImgFileList.get(0).isEmpty()&&itemFormDto.getId()==null){
+            return "item/itemForm";
+        }
+
+        try {
+            itemService.updateItem(itemFormDto,itemImgFileList);
+        }catch (Exception e){
+            model.addAttribute("errorMessage","물품 수정 중 에러가 발생하였습니다.");
+            return "item/itemForm";
+        }
+
+        return "redirect:/";
+
+    }
 
 }
