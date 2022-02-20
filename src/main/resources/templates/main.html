@@ -3,32 +3,99 @@
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{layouts/layout1}">
 
-<div class="container" layout:fragment="content">
-    
-  <div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-      <a class="p-2 text-muted" href="#"></a>
-    </nav>
-  </div>
+<div layout:fragment="content">
 
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic">Mains</h1>
-          <p class="lead my-3">여기다 사진 자동으로 넘어가는 기능 넣기</p>
-          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold"></a></p>
+    <!-- 메인화면의 사진과 검색 디자인 부분 -->
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark search-div" style="background-image: url('img/forest.jpg')">
+        <form class="search-form" th:action="@{/}" method="get">
+          <div class="box">
+            <button class="text-muted" aria-label="Search" type="submit" style="background-color: transparent; outline: 0; border: 0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+            </button>
+            <input class="box_input" name="searchQuery" type="text" placeholder="Search" size="16">
         </div>
+        </form>
     </div>
+
+    <!-- 검색 후 검색 키워드 및 총 게시물 수 부분 -->
+    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+    <p class="h3 font-weight-bold container" th:text="${itemSearchDto.searchQuery} + ' 검색결과'"></p> 
+    <div class="h3 font-weight-bold container" th:text="'총 게시물 수 : ' + ${itemtotal}"></div>
+    </div>
+    
+    <!-- 메인화면 사진 보여주는 부분 -->
+    <div class="gallery">
+      <div class="container">
+          <div class="controller">      
+          </div>
+      </div>
+  </div>
+    
+  <section id="tab-content">
+      <div class="container">
+          <div id="tab-1-content" class="tab-content-item show">
+              <div class="tab-1-content-inner">
+
+                <th:block th:each="item, status: ${items}">
+                  <div class="img-box">
+                      <a th:href="'/item/'+${item.id}"><img th:src="${item.imgUrl}" alt=""></a>
+                      <div class="comment">
+                          <a href="#a" class=""><i class="fas fa-heart"></i><span>36</span></a>
+                      </div>
+                  </div>
+                </th:block>
+
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- 페이지 부분 -->
+  <div>
+    <ul class="pagination justify-content-center">
+
+        <!-- 이전 화면 페이지 마지막번호로 이동 -->
+        <li class="page-item" th:if="${paging.prev} == true">
+            <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${paging.startPage-1} 
+        + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previousjump' class="page-link">
+                <span aria-hidden='true'>&lt;&lt;</span>
+            </a>
+        </li>
+
+        <!-- 이전페이지로 이동 -->
+        <li class="page-item" th:classappend="${paging.cri.page eq 1}?'disabled'">
+             <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${paging.cri.page-1} 
+        + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previous' class="page-link">
+                <span aria-hidden='true'>&lt;</span>
+            </a>
+        </li>
+
+        <!-- 현재 페이지 출력 및 이동 -->
+        <li class="page-item" th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}" th:classappend="${paging.cri.page eq page} ?'active':''">
+            <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page}
+            + '&perPageNum=' + ${paging.cri.perPageNum}}" th:inline="text" class="page-link" th:text="${page}"></a>
+        </li>
+
+        <!-- 다음페이지로 이동 -->
+        <li class="page-item" th:classappend="${paging.cri.page eq paging.totalCount}?'disabled'">
+            <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${paging.cri.page+1} 
+        + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previous' class="page-link">
+                <span aria-hidden='true'>&gt;</span>
+            </a>
+        </li>
+
+        <!-- 다음 화면 페이지 첫번째번호로 이동 -->
+        <li class="page-item" th:if="${paging.next} == true and ${paging.endPage} > 0">
+            <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${paging.endPage+1}
+            + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Nextjump' class="page-link">
+                <span aria-hidden='true'>&gt;&gt;</span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
 </div>
 
 </html>

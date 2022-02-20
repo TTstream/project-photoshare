@@ -2,11 +2,16 @@ package com.pictureproject.service;
 
 import com.pictureproject.dto.ItemFormDto;
 import com.pictureproject.dto.ItemImgDto;
+import com.pictureproject.dto.ItemSearchDto;
+import com.pictureproject.dto.MainItemDto;
 import com.pictureproject.entity.Item;
 import com.pictureproject.entity.ItemImg;
+import com.pictureproject.paging.Criteria;
 import com.pictureproject.repository.ItemImgRepository;
 import com.pictureproject.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,6 +85,24 @@ public class ItemService {
         }
 
         return item.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
+                                             Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto,pageable);
+    }
+
+    //메인페이지 총 게시물 개수
+    @Transactional(readOnly = true)
+    public List<MainItemDto> getMainItemListPage(ItemSearchDto itemSearchDto){
+        return itemRepository.getMainItemListPage(itemSearchDto);
+    }
+
+    //메인페이지 데이터를 가지고 올 시작 인데스 및 한 번에 가지고 올 최대 개수
+    @Transactional(readOnly = true)
+    public List<MainItemDto> getMainItemListShowPage(ItemSearchDto itemSearchDto,Criteria criteria){
+        return itemRepository.getMainItemListShowPage(itemSearchDto,criteria);
     }
 
 }
