@@ -33,12 +33,11 @@ public class MainController {
             model.addAttribute("userName","로그인");
         }
 
-        /*Pageable pageable= PageRequest.of(page.isPresent() ? page.get() : 0,1);
-        Page<MainItemDto> items=itemService.getMainItemPage(itemSearchDto,pageable);*/
+        //메인페이지 총 게시물개수
+        List<MainItemDto> itemtotal=itemService.getMainItemListPage(itemSearchDto);
 
-        List<MainItemDto> itemtotal=itemService.getMainItemListPage(itemSearchDto); //총 게시물개수
-
-        List<MainItemDto> itemsShow=itemService.getMainItemListShowPage(itemSearchDto,cri); //
+        //메인페이지 데이터를 가지고 올 시작 인덱스 및 한 번에 가지고 올 최대 개수
+        List<MainItemDto> itemsShow=itemService.getMainItemListShowPage(itemSearchDto,cri);
 
         Paging paging=new Paging();
         paging.setCri(cri);
@@ -50,11 +49,9 @@ public class MainController {
         model.addAttribute("itemtotal",itemtotal.size());
         model.addAttribute("items",itemsShow);
 
-        /*Pageable pageable= PageRequest.of(page.isPresent() ? page.get() : 0,1);
-        Page<MainItemDto> items=itemService.getMainItemPage(itemSearchDto,pageable);
-        model.addAttribute("items",items);
-        model.addAttribute("itemSearchDto",itemSearchDto);
-        model.addAttribute("totalPage",items.getTotalPages());*/
+        float lastPage=Math.round((float)itemtotal.size()/cri.getPerPageNum()); //; 전체 페이지의 마지막 페이지
+        model.addAttribute("lastPage",lastPage);
+
         return "main";
     }
 }

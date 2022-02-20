@@ -5,7 +5,7 @@
 
 <div layout:fragment="content">
 
-    <!-- 메인화면의 사진과 검색 디자인 부분 -->
+    <!-- 메인화면의 사진과 검색 디자인 부분-->
     <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark search-div" style="background-image: url('img/forest.jpg')">
         <form class="search-form" th:action="@{/}" method="get">
           <div class="box">
@@ -64,7 +64,7 @@
         </li>
 
         <!-- 이전페이지로 이동 -->
-        <li class="page-item" th:classappend="${paging.cri.page eq 1}?'disabled'">
+        <li class="page-item" th:classappend="${paging.cri.page le 1}?'disabled'">
              <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${paging.cri.page-1} 
         + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previous' class="page-link">
                 <span aria-hidden='true'>&lt;</span>
@@ -78,7 +78,7 @@
         </li>
 
         <!-- 다음페이지로 이동 -->
-        <li class="page-item" th:classappend="${paging.cri.page eq paging.totalCount}?'disabled'">
+        <li class="page-item" th:classappend="${lastPage eq paging.cri.page}?'disabled'">
             <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${paging.cri.page+1} 
         + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previous' class="page-link">
                 <span aria-hidden='true'>&gt;</span>
