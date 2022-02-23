@@ -49,7 +49,7 @@ public class MainController {
         model.addAttribute("itemtotal",itemtotal.size());
         model.addAttribute("items",itemsShow);
 
-        float lastPage=Math.round((float)itemtotal.size()/cri.getPerPageNum()); //; 전체 페이지의 마지막 페이지
+        double lastPage=Math.ceil((double) itemtotal.size()/cri.getPerPageNum()); //; 전체 페이지의 마지막 페이지
         model.addAttribute("lastPage",lastPage);
 
         return "main";
