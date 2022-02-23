@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns="http://www.thymeleaf.org/extras/spring-security">
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="header">
-    <div class="container">
-        <header class="blog-header py-3">
+    <div style="margin: 30px 50px 30px 50px;">
+        <header class="blog-header">
           <div class="row flex-nowrap justify-content-between align-items-center">
-            <!-- <div class="col-4 pt-1">
-              <a class="text-muted" href="#">Subscribe</a>
-            </div> -->
-            <div class="col-4 text-left">
-              <a class="blog-header-logo text-dark" href="#">PhotoShare</a>
+            <div class="col-4 pt-1">
+              <a class="blog-header-logo text-dark" href="/">PhotoShare</a>
             </div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
-              <a class="text-muted" href="#" aria-label="Search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
-              </a>
-              <a class="btn btn-sm btn-outline-secondary" th:href="@{/oauth2/authorization/google}" sec:authorize="isAnonymous">구글 로그인</a>
-                <a class="btn btn-sm btn-outline-secondary" th:href="@{/}" sec:authorize="isAuthenticated()">사진 공유</a>
-              <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
-              <a class="btn btn-sm btn-outline-secondary" href="#">회원가입</a>
+
+            <div align="right" class="col-4 justify-content-end align-items-center" >
+              
+              <a class="btn btn-sm btn-outline-secondary btntop" sec:authorize="isAnonymous" href="/oauth2/authorization/google">구글 로그인</a>
+                <a class="btn btn-sm btn-outline-secondary btntop" sec:authorize="isAuthenticated()" href="/user/item/new">사진업로드</a>
+                <a class="btn btn-sm btn-outline-secondary btntop" sec:authorize="isAuthenticated()" href="/user/items">사진관리</a>
+              <a class="btn btn-sm btn-outline-secondary btntop" sec:authorize="isAuthenticated()" href="/logout">로그아웃</a>
+              <a class="btn btn-sm btn-outline-secondary btntop" sec:authorize="isAuthenticated()" href="https://mail.google.com/mail/u/0/?logout&hl=en">다른아이디로 로그인</a>
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
               
             </div>
+
           </div>
         </header>
+
         </div>
 </div>
 

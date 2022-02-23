@@ -1,9 +1,9 @@
 /* stylelint-disable selector-list-comma-newline-after */
 
 .blog-header {
-  line-height: 2;
+  line-height: 1;
   border-bottom: 2px solid #e5e5e5;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .blog-header-logo {
@@ -24,13 +24,12 @@ h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
-.btn {
+.btntop {
   border-width: medium;
   font-weight: 700;
-  margin-left: 10px;
 }
 
-.display-4 {
+.btnmargin .display-4 {
   font-size: 2.5rem;
 }
 @media (min-width: 768px) {
@@ -110,13 +109,104 @@ h6 {
 /*
    * Footer
    */
+
 .blog-footer {
   padding: 2.5rem 0;
-  color: #999;
   text-align: center;
-  background-color: #f9f9f9;
-  border-top: 0.05rem solid #e5e5e5;
+  border-top: 2px solid #e5e5e5;
+  width: 100%;
+  height: 130px;
+  background-color: #fafafa;
 }
+
 .blog-footer p:last-child {
   margin-bottom: 0;
+}
+
+/*
+   * content
+   */
+/* .contents {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 200px;
+  margin-right: 200px;
+} */
+
+.contentbottom {
+  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.h2 {
+  margin-bottom: 20px;
+}
+
+.gallery .container .controller {
+  height: 20px;
+  width: 100%;
+  border-top: 1px solid #dbdbdb;
+}
+
+#tab-content #tab-1-content {
+  width: 100%;
+  margin-bottom: 30px;
+}
+#tab-content #tab-1-content .tab-1-content-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  grid-gap: 15px;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box {
+  position: relative;
+  height: 200px;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.one_container {
+  width: 100%;
+  min-height: 100%;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.photo_upload_form {
+  width: 100%;
+  max-width: 935px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo_upload_form_container {
+  width: 550px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.photo_upload_form_container2 {
+  padding: 10px 0 20px;
+  text-align: center;
+  border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  background-color: #fff;
+}
+
+.photo_upload_form_items {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  padding: 0 40px;
 }
