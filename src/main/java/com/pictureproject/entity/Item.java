@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "item")
 @Getter @Setter
 @ToString
-public class Item extends BaseEntity{
+public class Item extends BaseTimeEntity{
 
     @Id
     @Column(name = "item_id")
