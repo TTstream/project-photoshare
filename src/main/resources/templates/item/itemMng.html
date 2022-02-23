@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var errorMessage = [[${ errorMessage }]];
+            if (errorMessage != null) {
+                alert(errorMessage);
+            }
+        });
+    </script>
+
+</th:block>
+
+<div layout:fragment="content">
+    <section class="profile">
+        <div class="container">
+            <div class="profile-left">
+                <div class="profile-img-wrap story-border" onclick="popup('.modal-image')">
+                    <img th:src="${userPicture}">
+                    <svg viewbox="0 0 110 110">
+                        <circle cx="55" cy="55" r="53" />
+                    </svg>
+                </div>
+            </div>
+            <div class="profile-right">
+                <div class="name-group">
+                    <h2 th:text="${userName}">이름</h2>
+                    <!-- <button class="cta blue" onclick="location.href='imageUpload.html'">사진등록</button> -->
+                    <button class="modi" onclick="popup('.modal-info')"><i class="fas fa-cog"></i></button>
+                </div>
+
+                <div class="follow">
+                    <ul>
+                        <div th:text="${userEmail}">이메일</div>
+                    </ul>
+                </div>
+
+                <div class="follow">
+                    <ul>
+                        <li><a href="">게시물<span th:text="${itemtotal}"></span></a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 마이페이지화면 사진 보여주는 부분 -->
+    <div class="gallery">
+        <div class="container">
+            <div class="controller">
+            </div>
+        </div>
+    </div>
+
+<section id="tab-content">
+    <div class="container">
+        <div id="tab-1-content" class="tab-content-item show">
+            <div class="tab-1-content-inner">
+
+                <th:block th:each="item, status: ${items}">
+                    <div class="img-box">
+                        <a th:href="'/item/'+${item.mypageitemid}"><img th:src="${item.imgUrl}" alt=""></a>
+                        <div class="comment">
+                            <a href="#a" class=""><i class="fas fa-heart"></i><span></span></a>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 페이지 부분 -->
+<div th:if="${itemtotal ge 1}">
+    <ul class="pagination justify-content-center">
+
+        <!-- 이전 화면 페이지 마지막번호로 이동 -->
+        <li class="page-item" th:if="${paging.prev} == true">
+            <a th:href="@{'/user/items/' + '?page=' + ${paging.startPage-1} 
+        + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previousjump' class="page-link">
+                <span aria-hidden='true'>&lt;&lt;</span>
+            </a>
+        </li>
+
+        <!-- 이전페이지로 이동 -->
+        <li class="page-item" th:classappend="${paging.cri.page le 1}?'disabled'">
+             <a th:href="@{'/user/items/' + '?page=' + ${paging.cri.page-1} 
+        + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previous' class="page-link">
+                <span aria-hidden='true'>&lt;</span>
+            </a>
+        </li>
+
+        <!-- 현재 페이지 출력 및 이동 -->
+        <li class="page-item" th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}" th:classappend="${paging.cri.page eq page} ?'active':''">
+            <a th:href="@{'/user/items/' + '?page=' + ${page}
+            + '&perPageNum=' + ${paging.cri.perPageNum}}" th:inline="text" class="page-link" th:text="${page}"></a>
+        </li>
+
+        <!-- 다음페이지로 이동 -->
+        <li class="page-item" th:classappend="${lastPage eq paging.cri.page}?'disabled'">
+            <a th:href="@{'/user/items/' + '?page=' + ${paging.cri.page+1} 
+        + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Previous' class="page-link">
+                <span aria-hidden='true'>&gt;</span>
+            </a>
+        </li>
+
+        <!-- 다음 화면 페이지 첫번째번호로 이동 -->
+        <li class="page-item" th:if="${paging.next} == true and ${paging.endPage} > 0">
+            <a th:href="@{'/user/items/' + '?page=' + ${paging.endPage+1}
+            + '&perPageNum=' + ${paging.cri.perPageNum}}" aria-label='Nextjump' class="page-link">
+                <span aria-hidden='true'>&gt;&gt;</span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+</div>
+
+</html>
