@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 // 게시판 하단의 페이징
 public class Paging {
 
-    private int totalCount; // 게시판 전체 데이터 개수
+    private int totalCount=0; // 게시판 전체 데이터 개수
     private int displayPageNum = 10; // 게시판 화면에서 한번에 보여질 페이지 번호의 개수
 
-    private int startPage; // 화면의 시작 번호
-    private int endPage;  // 화면의 끝 번호
-    private boolean prev; // 페이징 이전 버튼 활성화 여부
-    private boolean next; // 페이징 다음 버튼 활성화 여부
+    private int startPage=0; // 화면의 시작 번호
+    private int endPage=0;  // 화면의 끝 번호
+    private boolean prev=false; // 페이징 이전 버튼 활성화 여부
+    private boolean next=false; // 페이징 다음 버튼 활성화 여부
 
     private Criteria cri;
 
