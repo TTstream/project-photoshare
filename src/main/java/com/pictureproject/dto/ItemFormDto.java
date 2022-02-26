@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public class ItemFormDto {
 
     @NotBlank(message = "상세 설명은 필수 입력 값입니다.")
     private String itemDetail; //물품 상세 설명
+    
+    private String register; //등록자
 
     //물품 수정할 때 물품 이미지 정보를 저장하는 리스트
     private List<ItemImgDto> itemImgDtoList=new ArrayList<>();

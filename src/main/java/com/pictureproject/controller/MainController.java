@@ -1,15 +1,18 @@
 package com.pictureproject.controller;
 
 import com.pictureproject.dto.ItemSearchDto;
+import com.pictureproject.dto.MainItemDetailDto;
 import com.pictureproject.dto.MainItemDto;
 import com.pictureproject.dto.SessionUser;
 import com.pictureproject.paging.Criteria;
 import com.pictureproject.paging.Paging;
 import com.pictureproject.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -54,4 +57,17 @@ public class MainController {
 
         return "main";
     }
+
+    //메인화면 사진 클릭시 처리될 api
+    @GetMapping("/api/item")
+    public ResponseEntity<?> MainItemInfo(MainItemDetailDto mainItemDetailDto){
+        return new ResponseEntity<>(mainItemDetailDto, HttpStatus.OK);
+    }
+
+    /*
+    마이페이지에서 할 부분
+    @GetMapping("/api/item/{itemId}")
+    public ResponseEntity<?> ItemInfo(@PathVariable Long itemId, MainItemDetailDto mainItemDetailDto){
+        return new ResponseEntity<>(mainService.getMainItemDetailDto(itemId,mainItemDetailDto), HttpStatus.OK);
+    }*/
 }

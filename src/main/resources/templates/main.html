@@ -3,6 +3,18 @@
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{layouts/layout1}">
 
+      <head>
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </head>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+    
+
+    </script>
+</th:block>
+
 <div layout:fragment="content">
 
     <!-- 메인화면의 사진과 검색 디자인 부분-->
@@ -37,23 +49,28 @@
           <div id="tab-1-content" class="tab-content-item show">
               <div class="tab-1-content-inner">
 
-                <th:block th:each="item, status: ${items}">
-                  <div class="img-box">
-                      <a th:href="'/item/'+${item.id}"><img th:src="${item.imgUrl}" alt=""></a>
+                  <div class="img-box" th:each="item, status: ${items}"
+                  th:data-parameter1="${item.id}" 
+                  th:data-parameter2="${item.title}"
+                  th:data-parameter3="${item.itemDetail}"
+                  th:data-parameter4="${item.imgUrl}"
+                    th:onclick="|mainPopup(this.getAttribute('data-parameter1'),this.getAttribute('data-parameter2'),
+                  this.getAttribute('data-parameter3'),this.getAttribute('data-parameter4'),'.modal-post')|">
+                      <img th:src="${item.imgUrl}" alt="">
                       <div class="comment">
-                          <a href="#a" class=""><i class="fas fa-heart"></i><span></span></a>
+                          <a class=""><i class="fas fa-heart"></i><span></span></a>
                       </div>
                   </div>
-                </th:block>
 
               </div>
           </div>
       </div>
   </section>
 
+
   <!-- 페이지 부분 -->
   <div>
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-center" id="btnpage">
 
         <!-- 이전 화면 페이지 마지막번호로 이동 -->
         <li class="page-item" th:if="${paging.prev} == true">
@@ -95,6 +112,14 @@
 
     </ul>
 </div>
+
+  <!--포스트 상세 정보 모달-->
+  <div class="modal-post">
+    <div class="subscribe">
+        <div class="subscribe-list" id="postInfoModal"></div>
+    </div>
+  </div>
+  <!--포스트 상세 정보 모달 end-->
 
 </div>
 

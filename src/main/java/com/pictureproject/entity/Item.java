@@ -22,6 +22,8 @@ public class Item extends BaseTimeEntity{
 
     private String itemDetail; //상품 상세 설명
 
+    private String register; //등록자
+
     public void updateItem(ItemFormDto itemFormDto){
         this.title=itemFormDto.getTitle();
         this.itemDetail=itemFormDto.getItemDetail();
