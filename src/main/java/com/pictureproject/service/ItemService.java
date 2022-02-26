@@ -1,22 +1,18 @@
 package com.pictureproject.service;
 
-import com.pictureproject.dto.ItemFormDto;
-import com.pictureproject.dto.ItemImgDto;
-import com.pictureproject.dto.ItemSearchDto;
-import com.pictureproject.dto.MainItemDto;
+import com.pictureproject.dto.*;
 import com.pictureproject.entity.Item;
 import com.pictureproject.entity.ItemImg;
 import com.pictureproject.paging.Criteria;
 import com.pictureproject.repository.ItemImgRepository;
 import com.pictureproject.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +24,14 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemImgService itemImgService;
     private final ItemImgRepository itemImgRepository;
-    
+    private final HttpSession httpSession;
+
     public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
-        
+
+        SessionUser user=(SessionUser) httpSession.getAttribute("user");
+
         //상품 등록
+        itemFormDto.setRegister(user.getEmail());
         Item item= itemFormDto.createItem();
         itemRepository.save(item);
         
@@ -87,11 +87,11 @@ public class ItemService {
         return item.getId();
     }
 
-    @Transactional(readOnly = true)
+    /* Test @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
                                              Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto,pageable);
-    }
+    }*/
 
     //메인페이지 총 게시물 개수
     @Transactional(readOnly = true)
@@ -104,5 +104,4 @@ public class ItemService {
     public List<MainItemDto> getMainItemListShowPage(ItemSearchDto itemSearchDto,Criteria criteria){
         return itemRepository.getMainItemListShowPage(itemSearchDto,criteria);
     }
-
 }

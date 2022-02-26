@@ -168,6 +168,29 @@ h6 {
   height: 100%;
   object-fit: cover;
 }
+#tab-content #tab-1-content .tab-1-content-inner .img-box .comment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box:hover .comment {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box .comment a {
+  color: #fff;
+}
+#tab-content #tab-1-content .tab-1-content-inner .img-box .comment a i {
+  margin-right: 10px;
+}
 
 .one_container {
   width: 100%;
