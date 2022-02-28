@@ -87,6 +87,12 @@ public class ItemService {
         return item.getId();
     }
 
+    //물품 삭제
+    public void deleteItem(Long itemId){
+        Item item=itemRepository.findById(itemId).get();
+        itemRepository.delete(item);
+    }
+
     /* Test @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
                                              Pageable pageable){

@@ -16,12 +16,15 @@ public class MyPageItemDto {
 
     private String imgUrl;
 
+    private String register;
+
     @QueryProjection
-    public MyPageItemDto(Long mypageitemid, String title,String itemDetail,String imgUrl){
+    public MyPageItemDto(Long mypageitemid, String title,String itemDetail,String imgUrl,String register){
         this.mypageitemid=mypageitemid;
         this.title=title;
         this.itemDetail=itemDetail;
         this.imgUrl=imgUrl;
+        this.register=register;
     }
 
 }

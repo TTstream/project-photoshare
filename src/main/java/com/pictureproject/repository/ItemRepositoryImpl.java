@@ -82,7 +82,9 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                                 myPageItem.id,
                                 myPageItem.item.title,
                                 myPageItem.item.itemDetail,
-                                itemImg.imgUrl)
+                                itemImg.imgUrl,
+                                myPageItem.item.register
+                                )
                 )
                 .from(myPageItem,itemImg)
                 .join(myPageItem.item)
@@ -103,10 +105,11 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
         return queryFactory
                 .select(
                         new QMyPageItemDto(
-                                myPageItem.id,
+                                myPageItem.item.id,
                                 myPageItem.item.title,
                                 myPageItem.item.itemDetail,
-                                itemImg.imgUrl)
+                                itemImg.imgUrl,
+                                myPageItem.item.register)
                 )
                 .from(myPageItem,itemImg)
                 .join(myPageItem.item)

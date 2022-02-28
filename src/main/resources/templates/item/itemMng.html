@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layouts/layout1}">
 
+    <head>
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </head>
+    
 <th:block layout:fragment="script">
 
     <script th:inline="javascript">
@@ -30,7 +35,7 @@
                 <div class="name-group">
                     <h2 th:text="${userName}">이름</h2>
                     <!-- <button class="cta blue" onclick="location.href='imageUpload.html'">사진등록</button> -->
-                    <button class="modi" onclick="popup('.modal-info')"><i class="fas fa-cog"></i></button>
+                    <!-- <button class="modi" onclick="popup('.modal-info')"><i class="fas fa-cog"></i></button> -->
                 </div>
 
                 <div class="follow">
@@ -61,15 +66,21 @@
         <div id="tab-1-content" class="tab-content-item show">
             <div class="tab-1-content-inner">
 
-                <th:block th:each="item, status: ${items}">
-                    <div class="img-box">
-                        <a th:href="'/item/'+${item.mypageitemid}"><img th:src="${item.imgUrl}" alt=""></a>
-                        <div class="comment">
-                            <a href="#a" class=""><i class="fas fa-heart"></i><span></span></a>
-                        </div>
+                <div class="img-box" th:each="item, status: ${items}"
+                th:data-parameter1="${item.mypageitemid}" 
+                th:data-parameter2="${item.title}"
+                th:data-parameter3="${item.itemDetail}"
+                th:data-parameter4="${item.imgUrl}"
+                th:onclick="|mypagePopup(this.getAttribute('data-parameter1'),
+                this.getAttribute('data-parameter2'), this.getAttribute('data-parameter3'),
+                this.getAttribute('data-parameter4'),'.modal-post')|">
+            
+                    <img th:src="${item.imgUrl}" alt="">
+                    <div class="comment">
+                        <a class=""><i class="fas fa-heart"></i><span></span></a>
                     </div>
-                </th:block>
-
+                </div>
+                
             </div>
         </div>
     </div>
@@ -77,7 +88,7 @@
 
 <!-- 페이지 부분 -->
 <div th:if="${itemtotal ge 1}">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-center" id="btnpage">
 
         <!-- 이전 화면 페이지 마지막번호로 이동 -->
         <li class="page-item" th:if="${paging.prev} == true">
@@ -119,6 +130,14 @@
 
     </ul>
 </div>
+
+  <!--포스트 상세 정보 모달-->
+  <div class="modal-post">
+    <div class="subscribe">
+        <div class="subscribe-list" id="postInfoModal"></div>
+    </div>
+  </div>
+  <!--포스트 상세 정보 모달 end-->
 
 </div>
 

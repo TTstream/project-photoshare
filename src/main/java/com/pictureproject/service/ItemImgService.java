@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -56,6 +58,28 @@ public class ItemImgService {
             savedItemImg.updateItemImg(oriImgName,imgName,imgUrl); //수정된 물품 이미지 업데이트
 
         }
+
+    }
+
+    //사진 삭제 및 ItemImg 데이터 삭제
+    public void deleteItemImg(Long itemId) throws Exception {
+        List<ItemImg> itemImgs=itemImgRepository.findByItemId(itemId);
+
+        List<Long> ItemImgIds=new ArrayList<>();
+
+        //사진 삭제
+        for(ItemImg itemImg:itemImgs){
+            if(itemImg.getImgUrl()!=null){
+                fileService.deleteFile(itemImgLocaiton+"/"+itemImg.getImgName());
+            }
+        }
+
+        //ItemImg 데이터 삭제
+        for(ItemImg itemImg:itemImgs){
+            ItemImgIds.add(itemImg.getId());
+        }
+
+        itemImgRepository.deleteAllByIdQuery(ItemImgIds);
 
     }
 

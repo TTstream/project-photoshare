@@ -13,9 +13,9 @@ import com.pictureproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -27,6 +27,7 @@ public class MyPageService {
     private final UserRepository userRepository;
     private final MyPageRepository myPageRepository;
     private final MyPageItemRepository myPageItemRepository;
+    private final HttpSession httpSession;
 
     //마이페이지 엔티티,마이페이지아이템 엔티티 생성 및 아이템 추가
     public Long addMypage(Long itemId, String email){
@@ -77,6 +78,27 @@ public class MyPageService {
 
         //장바구니에 담겨있는 물품 정보 조회
         return itemRepository.getItemMngListShowPage(criteria,myPage.getId());
+    }
+    
+    //마이페이지 사진 자세히보기
+    @Transactional(readOnly = true)
+    public MainItemDetailDto getMyPageItemInfo(Long itemId,MainItemDetailDto mainItemDetailDto){
+
+        Item item=itemRepository.findById(itemId).get();
+        SessionUser user=(SessionUser) httpSession.getAttribute("user");
+
+        if(item.getRegister().equals(user.getEmail())){
+            mainItemDetailDto.setRegister(true);
+        }else{
+            mainItemDetailDto.setRegister(false);
+        }
+        return mainItemDetailDto;
+    }
+
+    //MyPageItem 삭제
+    public void deleteMyPageItem(Long itemId) {
+        MyPageItem myPageItem=myPageItemRepository.findByItemId(itemId);
+        myPageItemRepository.delete(myPageItem);
     }
 
 }

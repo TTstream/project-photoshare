@@ -33,7 +33,13 @@
 }
 .modal-post .subscribe .subscribe-header .edit {
   position: absolute;
-  top: 15px;
+  left: 15px;
+  background-color: transparent;
+  border: 0;
+}
+.modal-post .subscribe .subscribe-header .delete {
+  position: absolute;
+  left: 50px;
   background-color: transparent;
   border: 0;
 }

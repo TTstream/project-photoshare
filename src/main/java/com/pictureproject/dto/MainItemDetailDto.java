@@ -11,5 +11,5 @@ public class MainItemDetailDto {
     private String title;
     private String itemDetail;
     private String imgUrl;
-    //private boolean register;
+    private boolean register=false;
 }
