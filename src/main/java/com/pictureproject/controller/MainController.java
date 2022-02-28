@@ -64,10 +64,4 @@ public class MainController {
         return new ResponseEntity<>(mainItemDetailDto, HttpStatus.OK);
     }
 
-    /*
-    마이페이지에서 할 부분
-    @GetMapping("/api/item/{itemId}")
-    public ResponseEntity<?> ItemInfo(@PathVariable Long itemId, MainItemDetailDto mainItemDetailDto){
-        return new ResponseEntity<>(mainService.getMainItemDetailDto(itemId,mainItemDetailDto), HttpStatus.OK);
-    }*/
 }
