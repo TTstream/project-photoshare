@@ -61,6 +61,14 @@
 </details>
 
 <details>
+<summary>[동작 순서]</summary>
+
+<img src = "https://user-images.githubusercontent.com/76469073/197994068-b2c928f9-e33d-4a82-ac32-96d34181cd44.png" width="80%" height="80%">
+
+</details>
+
+<details>
+ 
 <summary>[Code]</summary>
 
 - MainController.java: Paging 알고리즘을 이용해 페이지를 구현한다.
@@ -175,6 +183,13 @@ public class MainController {
 </details>
 
 <details>
+<summary>[동작 순서]</summary>
+
+<img src = "https://user-images.githubusercontent.com/76469073/197994556-5f5ec47b-a5ea-4372-93a2-b8cda60e8025.PNG" width="60%" height="60%">
+
+</details>
+  
+<details>
 <summary>[Code]</summary>
 
 - MainController.java
@@ -242,6 +257,13 @@ function mainPopup(itemId,itemtitle,itemDetail,imgUrl,obj) {
 <summary>[View]</summary>
 
 <img src = "https://user-images.githubusercontent.com/76469073/197388397-0b824ad2-d630-400d-b246-624e75054b77.png" width="60%" height="60%">
+
+</details>
+
+<details>
+<summary>[동작 순서]</summary>
+
+<img src = "https://user-images.githubusercontent.com/76469073/197994894-b9278054-fccc-4140-9e80-d8d1bd00b88e.PNG" width="60%" height="60%">
 
 </details>
 
@@ -373,6 +395,13 @@ public class OAuthAttributes {
 </details>
 
 <details>
+<summary>[동작 순서]</summary>
+
+<img src = "https://user-images.githubusercontent.com/76469073/197995096-c01e07a1-bd57-419d-a81d-26b31384d8eb.PNG" width="60%" height="60%">
+
+</details>
+
+<details>
 <summary>[Code]</summary>
 
 - FileService.java: UUID 값과 원래 파일의 이름의 확장자를 합쳐 저장 파일 이름을 생성한다.
@@ -482,6 +511,13 @@ public class OAuthAttributes {
 <summary>[View]</summary>
 
 <img src = "https://user-images.githubusercontent.com/76469073/197689938-1e61fa53-516d-4723-a8ba-0e3f69e77c3a.png" width="60%" height="60%">
+
+</details>
+
+<details>
+<summary>[동작 순서]</summary>
+
+<img src = "https://user-images.githubusercontent.com/76469073/197995354-8aaab9ad-fc9a-4cbe-9a25-639b7b3ee7cb.PNG" width="60%" height="60%">
 
 </details>
 
@@ -628,6 +664,13 @@ public class OAuthAttributes {
 <img src = "https://user-images.githubusercontent.com/76469073/197521809-56d57075-78ea-4623-b2ce-76ff953495a2.png" width="80%" height="80%">
 
 <img src = "https://user-images.githubusercontent.com/76469073/197522545-4b193507-36cc-439b-8b5f-b7825126121b.png" width="80%" height="80%">
+
+</details>
+
+<details>
+<summary>[동작 순서]</summary>
+
+<img src = "https://user-images.githubusercontent.com/76469073/197995711-4752c81a-c89a-4cba-8c77-f7532f0b1d0c.PNG" width="80%" height="80%">
 
 </details>
 
