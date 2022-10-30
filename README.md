@@ -855,3 +855,4 @@ public class OAuthAttributes {
 ## :books: 7. 참고자료
 - [Spring Boot + Thymeleaf] 스프링 부트 쇼핑몰 프로젝트 with JPA 책
 - [구글 로그인] http://yoonbumtae.com/?p=2652
+- [HTML + CSS + JavaScript] https://github.com/jeonghyun051/Spring-Instagram
