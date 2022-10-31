@@ -45,7 +45,7 @@ function mainPopup(itemId,itemtitle,itemDetail,imgUrl,obj) {
 function getPostModalInfo(MainItemDetailDto) {
     let item = `
     <div class="subscribe-header">
-            <span>찜?</span> `;
+            <span>${MainItemDetailDto.title}</span> `;
             item += `<button class="exit" onclick="modalClose()"><i class="fas fa-times"></i></button>`
             // if(MainItemDetailDto.register) {
             //     item += `<button class="edit" onclick="location.href='/user/item/${MainItemDetailDto.id}'"><i class="far fa-edit"></i></button>`
@@ -56,12 +56,6 @@ function getPostModalInfo(MainItemDetailDto) {
 	    <div class="subscribe__img">
 		    <img src="${MainItemDetailDto.imgUrl}"/>
 	    </div>
-
-        <div class="post-info">
-            <div class="text">
-	            <span>${MainItemDetailDto.title}</span>
-            </div>
-        </div>
 
         <div class="post-info">
             <div class="text">
