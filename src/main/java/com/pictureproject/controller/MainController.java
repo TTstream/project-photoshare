@@ -39,12 +39,12 @@ public class MainController {
         //메인페이지 총 게시물개수
         List<MainItemDto> itemtotal=itemService.getMainItemListPage(itemSearchDto);
 
-        //메인페이지 데이터를 가지고 올 시작 인덱스 및 한 번에 가지고 올 최대 개수
-        List<MainItemDto> itemsShow=itemService.getMainItemListShowPage(itemSearchDto,cri);
-
         Paging paging=new Paging();
         paging.setCri(cri);
         paging.setTotalCount(itemtotal.size());
+
+        //메인페이지 데이터를 가지고 올 시작 인덱스 및 한 번에 가지고 올 최대 개수
+        List<MainItemDto> itemsShow=itemService.getMainItemListShowPage(itemSearchDto, paging.getCri());
 
         System.out.println(paging.toString());
 
